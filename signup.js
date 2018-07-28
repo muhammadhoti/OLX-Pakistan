@@ -17,7 +17,7 @@ function signUp(){
         }).then(()=>{
 //adding Data TO Database 
         var uid = firebase.auth().currentUser.uid
-        var newUserRef = database.ref(`Users/${uid}`).push();
+        var newUserRef = database.ref(`users/${uid}`).push();
         newUserRef.set({
         userName: userName,
         email: email,
