@@ -1,3 +1,11 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', ev => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(res => console.log('registered!!!'))
+      .catch(err => console.log(err));
+  })
+}
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // console.log(user);
@@ -80,4 +88,3 @@ function errData(err){
   console.log(`Errorrr!!!`);
   console.log(err);
 }
-
