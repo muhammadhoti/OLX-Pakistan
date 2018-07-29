@@ -1,3 +1,17 @@
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // console.log(user);
+      // User is signed in.
+      document.getElementById("activeUser").style.display="block";
+      document.getElementById("inActiveUser").style.display="none";
+      document.getElementById("postad").style.display="block";
+      document.getElementById("greetUser").style.display="block";
+      document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
+      document.getElementById("greetUser").style.color="yellow";
+    } else {
+      // No user is signed in.
+    } 
+  });
 var database = firebase.database();
 
 function submitAdForm(){
@@ -22,6 +36,7 @@ function submitAdForm(){
         //adding Data TO Database 
     
     var uid = firebase.auth().currentUser.uid;
+    var displayName = firebase.auth().currentUser.displayName;
     var newAd = database.ref(`ads`).push();
     newAd.set({
         title: title,
@@ -29,8 +44,10 @@ function submitAdForm(){
         price: price,
         uid : uid,
         url : url,
-        category : category
+        category : category,
+        displayName: displayName
     })
         })
     .catch(console.error);
+    // form.reset();
     }

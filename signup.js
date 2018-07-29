@@ -1,3 +1,17 @@
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // console.log(user);
+      // User is signed in.
+      document.getElementById("activeUser").style.display="block";
+      document.getElementById("inActiveUser").style.display="none";
+      document.getElementById("postad").style.display="block";
+      document.getElementById("greetUser").style.display="block";
+      document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
+      document.getElementById("greetUser").style.color="yellow";
+    } else {
+      // No user is signed in.
+    } 
+  });
 //Data Base Reference 
 var database = firebase.database();
 function signUp(){
@@ -23,7 +37,17 @@ function signUp(){
         email: email,
         password: password,
         uid : uid})
-        })
+        }).then( 
+            ()=>{
+                var user = firebase.auth().currentUser;
+                user.updateProfile({
+                displayName: userName,}).then(function() {
+                  // Update successful.
+                }).catch(function(error) {
+                  // An error happened.
+                });        
+                }
+            )
     }
 //sign in button
 function goToSignIn(){

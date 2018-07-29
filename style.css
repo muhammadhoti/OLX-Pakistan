@@ -16,7 +16,7 @@
     
 }
 .suh{
-    margin: 10% auto 2% auto;
+    margin: 15% auto 2% auto;
 }
 .but{
     margin: 1% auto 1% auto;
@@ -34,3 +34,17 @@
 .cardstyling{
     margin: 0% 0% 2% 0%;
 } 
+.validate{
+    max-height: 300px;
+    max-width: 300px;
+    overflow: scroll;
+}
+.activeUser{
+    display: none;
+}
+#postad{
+    display: none;
+}
+#greetUser{
+    display: none;
+}

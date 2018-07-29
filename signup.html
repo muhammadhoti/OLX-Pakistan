@@ -20,16 +20,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item active " >
+            <a class="nav-link" href="#" id="greetUser"></a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="index.html">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="submitad.html">Post An Ad</a>
+                <a class="nav-link" id="postad" href="submitad.html">Post An Ad</a>
               </li>                
-            <li class="nav-item active">
+            <li class="nav-item" id="inActiveUser">
               <a class="nav-link" href="signin.html">Sign In/Register</a>
+            </li>
+            <li class="activeUser nav-item" id="activeUser">
+              <a class="nav-link" href="index.html" onclick="signOut()">Sign Out</a>
             </li>
           </ul>
         </div>
@@ -63,7 +69,7 @@
   </div>
 
           <!-- Footer -->
-  <footer id="footer" class="py-5 bg-dark">
+  <footer id="" class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
       </div>

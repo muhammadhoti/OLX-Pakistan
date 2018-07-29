@@ -20,14 +20,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item active " >
+            <a class="nav-link" href="#" id="greetUser"></a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="submitad.html">Post An Ad</a>
+              <a class="nav-link" id="postad" href="submitad.html">Post An Ad</a>
           </li>                
-          <li class="nav-item">
+          <li class="nav-item" class="inActiveUser" id="inActiveUser">
             <a class="nav-link" href="signin.html">Sign In/Register</a>
+          </li>
+          <li class="activeUser nav-item" id="activeUser">
+            <a class="nav-link" href="index.html" onclick="signOut()">Sign Out</a>
           </li>
         </ul>
       </div>
@@ -73,5 +79,6 @@
     <script src="signin.js"></script>
     <script src="submitad.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
