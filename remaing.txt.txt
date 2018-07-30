@@ -1,4 +1,0 @@
-1_PWA
-2_Favirate
-3_chat
-4_push Notification

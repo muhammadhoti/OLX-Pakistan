@@ -88,3 +88,21 @@ function errData(err){
   console.log(`Errorrr!!!`);
   console.log(err);
 }
+
+//search function
+function searchFunction() {
+  var search = document.getElementById('search');
+  var filter = search.value.toUpperCase();
+  var list =document.getElementsByClassName('card-title');
+  for(i=0 ;i<list.length ;i++){
+    // console.log(list[i].innerText);
+      if(list[i].innerText.toUpperCase().indexOf(filter) > -1){
+        list[i].parentElement.parentElement.parentElement.style.display="";
+      }
+    else{
+      list[i].parentElement.parentElement.parentElement.style.display="none";
+    }
+  }
+}
+
+
