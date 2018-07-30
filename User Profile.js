@@ -111,7 +111,9 @@ function signOut(){
           list[i].parentElement.parentElement.parentElement.style.display="";
         }
       else{
-        list[i].parentElement.parentElement.parentElement.style.display="none";
+        var a =list[i].parentElement.parentElement.parentElement;
+        a.parentElement.removeChild(a);
+
       }
     }
   }
