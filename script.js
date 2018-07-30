@@ -13,9 +13,10 @@ firebase.auth().onAuthStateChanged(function(user) {
     document.getElementById("activeUser").style.display="block";
     document.getElementById("inActiveUser").style.display="none";
     document.getElementById("postad").style.display="block";
-    document.getElementById("greetUser").style.display="block";
-    document.getElementById("greetUser").style.color="yellow";
-    document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
+    // document.getElementById("greetUser").style.display="block";
+    // document.getElementById("greetUser").style.color="yellow";
+    // document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
+    document.getElementById("userProfile").innerHTML=firebase.auth().currentUser.displayName;
   } else {
     // No user is signed in.
   } 

@@ -1,3 +1,11 @@
+function signOut(){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+        console.log(error);
+      });
+    }
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // console.log(user);
@@ -5,9 +13,10 @@ firebase.auth().onAuthStateChanged(function(user) {
       document.getElementById("activeUser").style.display="block";
       document.getElementById("inActiveUser").style.display="none";
       document.getElementById("postad").style.display="block";
-      document.getElementById("greetUser").style.display="block";
-      document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
-      document.getElementById("greetUser").style.color="yellow";
+      document.getElementById("userProfile").innerHTML=firebase.auth().currentUser.displayName;
+    //   document.getElementById("greetUser").style.display="block";
+    //   document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
+    //   document.getElementById("greetUser").style.color="yellow";
     } else {
       // No user is signed in.
     } 
@@ -48,6 +57,24 @@ function submitAdForm(){
         displayName: displayName
     })
         })
-    .catch(console.error);
+    .catch(console.error).then( 
+        ()=>{
+    
+    document.getElementById("submitAdSuccessfull").style.display = "block";
+    document.getElementById("submitAdSuccessfull").innerHTML = "Succesfully Posted";
+                            
+            }
+        ).then( 
+            ()=>{
+                
+                setTimeout(function(){
+                    var user = firebase.auth().currentUser;
+                    if(user !== null){
+                        window.location.href = "User Profile.html";    
+                                    } 
+                                    }, 3000);
+                                        }
+                
+                )
     // form.reset();
     }

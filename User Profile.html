@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOME</title>
+    <title id="titlepage"></title>
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="icon" href="images/OLX-Logo.png" type="icon" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
@@ -23,14 +23,14 @@
           <!-- <li class="nav-item active " >
             <a class="nav-link" href="#" id="greetUser"></a>
           </li> -->
-          <li class="nav-item active " >
+          <li class="nav-item" >
             <a class="nav-link"><input class="form-control border-secondary py-2" type="search" name="search" id="search" placeholder="Search Ads Here" onkeyup="searchFunction()"/></a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" class="userProfile" href="User Profile.html" id="userProfile"></a>
+          <li class="nav-item active">
+              <a class="nav-link" href="User Profile.html" id="userProfile">User Profile</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" id="postad" href="submitad.html">Post An Ad</a>
@@ -46,7 +46,7 @@
     </div>
   </nav>
         
-  <h1 class="suh text-center text-dark">Recent Ads</h1>   
+  <h1 class="suh text-center text-dark" id="suh"></h1>   
 
     <!-- Add Your Main Code Here  -->
     <!-- <button type="button" class="btn btn-primary" onclick="signOut()">Sign Out</button> -->
@@ -84,8 +84,8 @@
     <script src="signup.js"></script>
     <script src="signin.js"></script>
     <script src="submitad.js"></script>
-    <!-- <script src="User Profile.js"></script> -->
-    <script src="script.js"></script>
+    <script src="User Profile.js"></script>
+    <!-- <script src="script.js"></script> -->
 
 </body>
 </html>
