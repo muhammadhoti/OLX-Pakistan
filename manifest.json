@@ -1,0 +1,11 @@
+{
+  "name": "OLX Pakistan",
+  "short_name": "OLX-PK",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "orientation": "portrait",
+  "Scope": "/",
+  "icons": null,
+  "splash_pages": null
+}

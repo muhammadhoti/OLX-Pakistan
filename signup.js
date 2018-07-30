@@ -15,6 +15,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 //Data Base Reference 
 var database = firebase.database();
 function signUp(){
+    var successful = true;
     var form = document.getElementById("signUpForm");
     var userName = form.userName.value;
     var email = form.email.value;
@@ -25,8 +26,10 @@ function signUp(){
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        successful = false;
         document.getElementById("alreadyAccount").style.display = "block";
         document.getElementById("alreadyAccount").innerHTML = errorMessage;
+        
         
         }).then(()=>{
 //adding Data TO Database 
@@ -47,8 +50,26 @@ function signUp(){
                   // An error happened.
                 });        
                 }
-            )
-    }
+            ).then( 
+                ()=>{
+            if(successful === true){
+            document.getElementById("accountRegistered").style.display = "block";
+            document.getElementById("accountRegistered").innerHTML = "Succesfully Sign Up";
+                                    }
+                    }
+                ).then( 
+                    ()=>{
+                        if(successful === true){
+                        setTimeout(function(){ 
+                            var user = firebase.auth().currentUser;
+                            if(user !== null){
+                                window.location.href = "index.html";    
+                                            } 
+                                            }, 3000);
+                                                }
+                    }
+                    )
+        }
 //sign in button
 function goToSignIn(){
     window.location.href = "signin.html";

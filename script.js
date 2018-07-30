@@ -71,11 +71,11 @@ function fetchData(data){
     var url = ads[k].url;
     var price = ads[k].price;
     var displayName = ads[k].displayName;
-    // console.log(category,description,title,uid,url,price);
+    // console.log(`cateogry:${category}`,`description:${description}`,title,uid,url,price);
 
     adCard();
     createAdCard();
-    document.getElementsByTagName(`small`)[i].innerHTML="Ad By "+displayName;
+    document.getElementsByTagName(`small`)[i].innerHTML="By "+displayName;
     document.getElementsByTagName(`img`)[i].setAttribute(`src`,url);
     document.getElementsByTagName(`h4`)[i].innerHTML= title;
     document.getElementsByTagName(`p`)[i].innerHTML=description;

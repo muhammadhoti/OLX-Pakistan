@@ -14,6 +14,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   });
 
 function signIn(){
+    signInSuccessfull = true;
     var form = document.getElementById("signInForm");
     var email = form.email.value;
     var password = form.password.value;
@@ -25,14 +26,30 @@ function signIn(){
     // ...
     document.getElementById("wrongInfo").style.display = "block";
     document.getElementById("wrongInfo").innerHTML = errorMessage;
+    signInSuccessfull = false;
     // if(errorMessage !== ""){
     //     window.location.href = "index.html";        
     // }
-        })
-    // var user = firebase.auth().currentUser;
-    // if(user !== null){
-    //     window.location.href = "index.html";    
-    // }
+        }).then( 
+            ()=>{
+        if(signInSuccessfull === true){
+        document.getElementById("signInSuccessfull").style.display = "block";
+        document.getElementById("signInSuccessfull").innerHTML = "Succesfully Sign In";
+                                }
+                }
+            ).then( 
+                ()=>{
+                    if(successful === true){
+                    setTimeout(function(){
+                        var user = firebase.auth().currentUser;
+                        if(user !== null){
+                            window.location.href = "index.html";    
+                                        } 
+                                        }, 3000);
+                                            }
+                    }
+                    )
+ 
 }
 function goToSignUp(){
     window.location.href = "signup.html";
