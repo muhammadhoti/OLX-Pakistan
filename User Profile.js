@@ -43,7 +43,7 @@ function signOut(){
           <h4 class="card-title"></h4>
           <p class="validate card-text"></p>
           <h5></h5>
-          <button type="button" class="btn btn-primary" onclick="sendMessage()">Message</button>
+          <button type="button" class="btn btn-danger" onclick="deleteAd()">Delete</button>
         </div>
       </div>
     </div>

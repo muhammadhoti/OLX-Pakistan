@@ -10,13 +10,14 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // console.log(user);
     // User is signed in.
+    
     document.getElementById("activeUser").style.display="block";
     document.getElementById("inActiveUser").style.display="none";
     document.getElementById("postad").style.display="block";
-    // document.getElementById("greetUser").style.display="block";
     // document.getElementById("greetUser").style.color="yellow";
     // document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
     document.getElementById("userProfile").innerHTML=firebase.auth().currentUser.displayName;
+    
   } else {
     // No user is signed in.
   } 
@@ -32,6 +33,22 @@ firebase.auth().signOut().then(function() {
 }
 
 function adCard(){
+  
+  if(firebase.auth().currentUser === null){
+    return`
+    <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
+      <div class="card h-100">
+        <small></small>
+        <img class="validate card-img-top" src=""/>
+        <div class="card-body">
+          <h4 class="card-title"></h4>
+          <p class="validate card-text"></p>
+          <h5></h5>
+        </div>
+      </div>
+    </div>
+  `
+  }else{
  return`
   <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
     <div class="card h-100">
@@ -45,7 +62,7 @@ function adCard(){
       </div>
     </div>
   </div>
-`
+`}
   }
 
   function createAdCard(){
