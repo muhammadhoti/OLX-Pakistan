@@ -32,6 +32,9 @@ firebase.auth().signOut().then(function() {
   });
 }
 
+
+
+
 function adCard(){
   
   if(firebase.auth().currentUser === null){
@@ -41,7 +44,8 @@ function adCard(){
         <small></small>
         <img class="validate card-img-top" src=""/>
         <div class="card-body">
-          <h4 class="card-title"></h4>
+          <h3 class="card-title"></h3>
+          <h4 class="category"></h4>
           <p class="validate card-text"></p>
           <h5></h5>
         </div>
@@ -55,7 +59,8 @@ function adCard(){
       <small></small>
       <img class="validate card-img-top" src=""/>
       <div class="card-body">
-        <h4 class="card-title"></h4>
+      <h3 class="card-title"></h3>
+      <h4 class="category"></h4>
         <p class="validate card-text"></p>
         <h5></h5>
         <button type="button" class="btn btn-primary" onclick="sendMessage()">Message</button>
@@ -72,14 +77,12 @@ function adCard(){
   const adsRef = database.ref("ads");
   adsRef.on(`value`, fetchData, errData);
 
-  
-
 function fetchData(data){
   // console.log(data.val());
   var ads = data.val();
   var keys = Object.keys(ads);
   // console.log(keys);
-  
+
   for(var i =0 ; i<keys.length ; i++){
     var k = keys[i];
     var category = ads[k].category;
@@ -90,17 +93,15 @@ function fetchData(data){
     var price = ads[k].price;
     var displayName = ads[k].displayName;
     // console.log(`cateogry:${category}`,`description:${description}`,title,uid,url,price);
-
     adCard();
     createAdCard();
     document.getElementsByTagName(`small`)[i].innerHTML="By "+displayName;
     document.getElementsByTagName(`img`)[i].setAttribute(`src`,url);
-    document.getElementsByTagName(`h4`)[i].innerHTML= title;
+    document.getElementsByTagName(`h3`)[i].innerHTML= title;
     document.getElementsByTagName(`p`)[i].innerHTML=description;
     document.getElementsByTagName(`h5`)[i].innerHTML="Rs. "+price;
-   
-  }
-  
+    document.getElementsByTagName(`h4`)[i].innerHTML= `${category}`;
+                                        }
 }
 function errData(err){
   console.log(`Errorrr!!!`);
@@ -119,6 +120,32 @@ function searchFunction() {
       }
     else{
       list[i].parentElement.parentElement.parentElement.style.display="none";
+    }
+  }
+}
+
+//HomePageCategoySelection
+
+function selectCategory() {
+  // var categoryOnHomepage = document.getElementById(`homePageCategorySelection`);
+  // categoryOnHomepage.options[categoryOnHomepage.selectedIndex].value;
+  var selectCategory = document.getElementById(`homePageCategorySelection`);
+  selectCategory.options[selectCategory.selectedIndex].value;
+  var categoryDivs =document.getElementsByClassName(`category`);
+
+  for(i=0 ;i<categoryDivs.length ;i++){
+
+    
+    // console.log(categoryDivs[i].innerHTML);
+    if(selectCategory.options[selectCategory.selectedIndex].value === `All Categories`){
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="";
+    }
+    else if(selectCategory.options[selectCategory.selectedIndex].value === `${categoryDivs[i].innerHTML}`){
+      // console.log(categoryDivs[i].innerHTML)
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="";
+    }
+    else{
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="none";
     }
   }
 }

@@ -40,7 +40,8 @@ function signOut(){
         <small></small>
         <img class="validate card-img-top" src=""/>
         <div class="card-body">
-          <h4 class="card-title"></h4>
+          <h3 class="card-title"></h3>
+          <h4 class="category"></h4>
           <p class="validate card-text"></p>
           <h5></h5>
           <button type="button" class="btn btn-danger" onclick="deleteAd()">Delete</button>
@@ -83,12 +84,13 @@ function signOut(){
 
       document.getElementsByTagName(`small`)[i].innerHTML="By "+displayName;
       document.getElementsByTagName(`img`)[i].setAttribute(`src`,url);
-      document.getElementsByTagName(`h4`)[i].innerHTML= title;
+      document.getElementsByTagName(`h3`)[i].innerHTML= title;
       document.getElementsByTagName(`p`)[i].innerHTML=description;
       document.getElementsByTagName(`h5`)[i].innerHTML="Rs. "+price;
+      document.getElementsByTagName(`h4`)[i].innerHTML=category;
 
       }
-      if(document.getElementsByTagName(`h4`)[i].innerHTML=== ""){
+      if(document.getElementsByTagName(`h3`)[i].innerHTML=== ""){
         document.getElementsByTagName(`small`)[i].parentElement.parentElement.style.display=`none`;
       }
                                                 }
@@ -117,6 +119,31 @@ function signOut(){
       }
     }
   }
-  
+
+//HomePageCategoySelection
+
+function selectCategory() {
+  // var categoryOnHomepage = document.getElementById(`homePageCategorySelection`);
+  // categoryOnHomepage.options[categoryOnHomepage.selectedIndex].value;
+  var selectCategory = document.getElementById(`homePageCategorySelection`);
+  selectCategory.options[selectCategory.selectedIndex].value;
+  var categoryDivs =document.getElementsByClassName(`category`);
+
+  for(i=0 ;i<categoryDivs.length ;i++){
+
+    
+    // console.log(categoryDivs[i].innerHTML);
+    if(selectCategory.options[selectCategory.selectedIndex].value === `All Categories`){
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="";
+    }
+    else if(selectCategory.options[selectCategory.selectedIndex].value === `${categoryDivs[i].innerHTML}`){
+      // console.log(categoryDivs[i].innerHTML)
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="";
+    }
+    else{
+      categoryDivs[i].parentElement.parentElement.parentElement.style.display="none";
+    }
+  }
+}
   
   
