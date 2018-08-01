@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title id="titlepage"></title>
+    <title>Favourites</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="icon" href="images/OLX-Logo.png" type="icon" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
@@ -23,17 +23,17 @@
           <!-- <li class="nav-item active " >
             <a class="nav-link" href="#" id="greetUser"></a>
           </li> -->
-          <li class="nav-item" >
+          <li class="nav-item " >
             <a class="nav-link"><input class="form-control border-secondary py-2" type="search" name="search" id="search" placeholder="Search Ads Here" onkeyup="searchFunction()"/></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item active">
-              <a class="nav-link" href="User Profile.html" id="userProfile">User Profile</a>
+          <li class="nav-item">
+                <a class="nav-link" href="User Profile.html" id="userProfile"></a>
           </li>
-          <li class="nav-item ">
-              <a class="nav-link" class="favourite" style="display: none" href="favourite.html" id="favourite">Favourites</a>
+          <li class="nav-item active">
+                <a class="nav-link" class="favourite" href="favourite.html" id="favourite">Favourite</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" id="postad" href="submitad.html">Post An Ad</a>
@@ -49,20 +49,20 @@
     </div>
   </nav>
         
-  <h1 class="suh text-center text-dark" id="suh"></h1>   
-  <div class="container">
-    <div class="form-group">
-      <label for="category"><b>Select Category</b></label>
-      <select onchange="selectCategory()" name="category" id="homePageCategorySelection" class="form-control" id="category">
-          <option>All Categories</option>
-          <option>Vehicles</option>
-          <option>Electronics And Home Appliances</option>
-          <option>Furnitue,Home And Decoration</option>
-          <option>Fashion And Beauty</option>
-          <option>Books Sports And Hobbies</option>
-      </select>
-    </div>
-  </div>   
+  <h1 id="suh" class="suh text-center text-dark">Favourites By User</h1>
+  <!-- <div class="container">
+  <div class="form-group">
+    <label for="category"><b>Select Category</b></label>
+    <select onchange="selectCategory()" name="category" id="homePageCategorySelection" class="form-control" id="category">
+        <option>All Categories</option>
+        <option>Vehicles</option>
+        <option>Electronics And Home Appliances</option>
+        <option>Furnitue,Home And Decoration</option>
+        <option>Fashion And Beauty</option>
+        <option>Books Sports And Hobbies</option>
+    </select>
+  </div>
+</div>    -->
 
     <!-- Add Your Main Code Here  -->
     <!-- <button type="button" class="btn btn-primary" onclick="signOut()">Sign Out</button> -->
@@ -75,7 +75,6 @@
   <!-- Footer -->
   <footer class="grid py-5 bg-dark">
     <div class="container">
-        <div class="container">
             <address style="color:#f0f5f5;font-family:Times New Roman;Text-Align:center">
                     Website Owner : Muhammad Hoti<sup>©</sup><br>
                     Cell No.      : 0332-0355566<br>
@@ -83,6 +82,7 @@
                     Twitter       : <a href="https://twitter.com/muhammadhoti"target="_blank">Find Us On Twitter</a><br>
                     Github       : <a href="https://github.com/muhammadhoti"target="_blank">Find Us On Github</a><br>
                     </address>
+      <p class="m-0 text-center text-white"></p>
     </div>
     <!-- /.container -->
   </footer>
@@ -105,11 +105,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="signup.js"></script>
+    <script src="favourite.js"></script>
+    <!-- <script src="signup.js"></script>
     <script src="signin.js"></script>
-    <script src="submitad.js"></script>
-    <script src="User Profile.js"></script>
-    <!-- <script src="favourite.html"></script> -->
+    <script src="submitad.js"></script> -->
+    <!-- <script src="User Profile.js"></script> -->
     <!-- <script src="script.js"></script> -->
 
 </body>

@@ -65,3 +65,6 @@
 .category{
     color: gray;
 }
+.favourite{
+    display: none;
+}

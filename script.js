@@ -17,6 +17,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     // document.getElementById("greetUser").style.color="yellow";
     // document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
     document.getElementById("userProfile").innerHTML=firebase.auth().currentUser.displayName;
+    document.getElementById("favourite").style.display="block";
     
   } else {
     // No user is signed in.
@@ -59,11 +60,12 @@ function adCard(){
       <small></small>
       <img class="validate card-img-top" src=""/>
       <div class="card-body">
-      <h3 class="card-title"></h3>
-      <h4 class="category"></h4>
+        <h3 class="card-title"></h3>
+        <h4 class="category"></h4>
         <p class="validate card-text"></p>
         <h5></h5>
         <button type="button" class="btn btn-primary" onclick="sendMessage()">Message</button>
+        <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
       </div>
     </div>
   </div>
@@ -150,4 +152,28 @@ function selectCategory() {
   }
 }
 
-
+//Favourites Function
+function addToFavourites(button){
+  
+  var category=button.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+  var description=button.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+  var displayName=button.parentElement.parentElement.firstElementChild.innerHTML;
+  var price=button.previousElementSibling.previousElementSibling.innerHTML;
+  var title=button.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+  var url=button.parentElement.parentElement.firstElementChild.nextElementSibling.src;
+  // console.log(`category :${category}` + `\n`
+  // +`displayName :${displayName}` + `\n`
+  // + `description :${description}` + `\n`
+  // + `price :${price}` + `\n`
+  // + `title :${title}` + `\n`
+  // + `url :${url}` + `\n`
+  // );
+  database.ref('favourites/' + firebase.auth().currentUser.uid).push().set({
+    category : category,
+    description : description,
+    displayName : displayName,
+    price : price,
+    title : title,
+    url : url
+  });
+}

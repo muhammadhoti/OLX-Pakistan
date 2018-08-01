@@ -17,6 +17,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     //   document.getElementById("greetUser").style.display="block";
     //   document.getElementById("greetUser").innerHTML = `Welcome ${firebase.auth().currentUser.displayName} !`;
     //   document.getElementById("greetUser").style.color="yellow";
+    document.getElementById("favourite").style.display="block";
     } else {
       // No user is signed in.
     } 
