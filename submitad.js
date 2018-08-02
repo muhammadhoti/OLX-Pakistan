@@ -47,7 +47,7 @@ function submitAdForm(){
     
     var uid = firebase.auth().currentUser.uid;
     var displayName = firebase.auth().currentUser.displayName;
-    var newAd = database.ref(`ads`).push();
+    var newAd = database.ref(`ads/`).push();
     newAd.set({
         title: title,
         description: description,

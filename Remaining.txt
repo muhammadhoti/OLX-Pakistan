@@ -1,5 +1,4 @@
 1_menifest
 2_PWA
-3_Favirate With Offline
-4_chat
-5_push Notification
+3_chat
+4_push Notification

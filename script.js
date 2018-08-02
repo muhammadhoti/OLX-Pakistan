@@ -36,19 +36,21 @@ firebase.auth().signOut().then(function() {
 
 
 
-function adCard(){
+function adCard(data, key){
   
   if(firebase.auth().currentUser === null){
     return`
     <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <small></small>
-        <img class="validate card-img-top" src=""/>
-        <div class="card-body">
-          <h3 class="card-title"></h3>
-          <h4 class="category"></h4>
-          <p class="validate card-text"></p>
-          <h5></h5>
+      <small>${data.displayName}</small>
+      <img class="validate card-img-top" src=${data.url} />
+      <div class="card-body">
+      <h3 class="card-title">${data.title}</h3>
+      <h4 class="category">${data.category}</h4>
+      <p class="validate card-text">${data.description}</p>
+      <h5>Rs. ${data.price}</h5>
+      <button type="button" class="btn btn-primary" onclick="signInFirst()">Chat</button>
+      <button type="button" class="btn btn-warning" onclick="signInFirst()">Add To Favourites</button>
         </div>
       </div>
     </div>
@@ -57,58 +59,36 @@ function adCard(){
  return`
   <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
     <div class="card h-100">
-      <small></small>
-      <img class="validate card-img-top" src=""/>
+      <small>${data.displayName}</small>
+      <img class="validate card-img-top" src=${data.url} />
       <div class="card-body">
-        <h3 class="card-title"></h3>
-        <h4 class="category"></h4>
-        <p class="validate card-text"></p>
-        <h5></h5>
-        <button type="button" class="btn btn-primary" onclick="sendMessage()">Message</button>
-        <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
-      </div>
+      <h3 class="card-title">${data.title}</h3>
+      <h4 class="category">${data.category}</h4>
+      <p class="validate card-text">${data.description}</p>
+      <h5>Rs. ${data.price}</h5>
+      <button type="button" class="btn btn-primary" onclick="sendMessage()">Chat</button>
+      <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
+    </div>
     </div>
   </div>
 `}
   }
 
-  function createAdCard(){
-    document.getElementById("row").innerHTML += adCard();
-  }
   var database = firebase.database();
   const adsRef = database.ref("ads");
-  adsRef.on(`value`, fetchData, errData);
 
-function fetchData(data){
-  // console.log(data.val());
-  var ads = data.val();
-  var keys = Object.keys(ads);
-  // console.log(keys);
+  function fetchAds(){
+    
+    adsRef.on('child_added', function (data) {
+      // console.log(data.val());
+      adCard(data.val(), data.key);
+      document.getElementById("row").innerHTML += adCard(data.val(), data.key);
+      
+    });
+  }
 
-  for(var i =0 ; i<keys.length ; i++){
-    var k = keys[i];
-    var category = ads[k].category;
-    var description = ads[k].description;
-    var title = ads[k].title;
-    var uid = ads[k].uid;
-    var url = ads[k].url;
-    var price = ads[k].price;
-    var displayName = ads[k].displayName;
-    // console.log(`cateogry:${category}`,`description:${description}`,title,uid,url,price);
-    adCard();
-    createAdCard();
-    document.getElementsByTagName(`small`)[i].innerHTML="By "+displayName;
-    document.getElementsByTagName(`img`)[i].setAttribute(`src`,url);
-    document.getElementsByTagName(`h3`)[i].innerHTML= title;
-    document.getElementsByTagName(`p`)[i].innerHTML=description;
-    document.getElementsByTagName(`h5`)[i].innerHTML="Rs. "+price;
-    document.getElementsByTagName(`h4`)[i].innerHTML= `${category}`;
-                                        }
-}
-function errData(err){
-  console.log(`Errorrr!!!`);
-  console.log(err);
-}
+  //Calling Fetching Function
+  fetchAds();
 
 //search function
 function searchFunction() {
@@ -176,4 +156,8 @@ function addToFavourites(button){
     title : title,
     url : url
   });
+}
+
+function signInFirst(){
+  window.location.href = "signin.html";
 }

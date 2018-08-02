@@ -19,6 +19,11 @@ function signOut(){
       document.getElementById(`titlepage`).innerHTML = firebase.auth().currentUser.displayName;
       document.getElementById("userProfile").innerHTML=firebase.auth().currentUser.displayName;
       document.getElementById(`suh`).innerHTML = `Ads Posted By ${firebase.auth().currentUser.displayName}`
+
+      //Calling Fetching Function
+
+      fetchUserAds();
+
     } else {
       // No user is signed in.
     } 
@@ -33,75 +38,53 @@ function signOut(){
     });
   }
   
-  function adCard(){
+  //Declaring Firebase Database 
+  var database = firebase.database();
+  var userAds = database.ref("ads/");
+
+  //Fetching UserAds
+  function fetchUserAds(){
+    userAds.on('child_added', function (data) {
+      var a=data.val()
+      
+      var uid = a.uid;
+      
+    if(uid===firebase.auth().currentUser.uid){
+    adCard(data.val(), data.key);
+    document.getElementById("row").innerHTML += adCard(data.val(), data.key);
+    }
+  });
+    }
+
+  //Generating AdCard
+
+  function adCard(data, key){
    return`
     <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <small></small>
-        <img class="validate card-img-top" src=""/>
+        <small>${data.displayName}</small>
+        <img class="validate card-img-top" src=${data.url} />
         <div class="card-body">
-          <h3 class="card-title"></h3>
-          <h4 class="category"></h4>
-          <p class="validate card-text"></p>
-          <h5></h5>
-          <button type="button" class="btn btn-danger" onclick="deleteAd()">Delete</button>
+        <h3 class="card-title">${data.title}</h3>
+        <h4 class="category">${data.category}</h4>
+        <p class="validate card-text">${data.description}</p>
+        <h5>Rs. ${data.price}</h5>
+        <button type="button" class="btn btn-danger" onclick="deleteAd('${key}',this)">Delete</button>
         </div>
       </div>
     </div>
   `
     }
-  
-    function createAdCard(){
-      document.getElementById("row").innerHTML += adCard();
-    }
-    var database = firebase.database();
-    const adsRef = database.ref("ads");
-    adsRef.on(`value`, fetchData, errData);
-  
-    
-  
-  function fetchData(data){
-    // console.log(data.val());
-    var ads = data.val();
-    var keys = Object.keys(ads);
-    // console.log(keys);
-    
-    for(var i =0 ; i<keys.length ; i++){
-      var k = keys[i];
-      var category = ads[k].category;
-      var description = ads[k].description;
-      var title = ads[k].title;
-      var uid = ads[k].uid;
-      var url = ads[k].url;
-      var price = ads[k].price;
-      var displayName = ads[k].displayName;
-      // console.log(`cateogry:${category}`,`description:${description}`,title,uid,url,price);
-    
-      adCard();
-      createAdCard();
 
-      if(uid===firebase.auth().currentUser.uid){
+  //Delete Ad 
 
-      document.getElementsByTagName(`small`)[i].innerHTML="By "+displayName;
-      document.getElementsByTagName(`img`)[i].setAttribute(`src`,url);
-      document.getElementsByTagName(`h3`)[i].innerHTML= title;
-      document.getElementsByTagName(`p`)[i].innerHTML=description;
-      document.getElementsByTagName(`h5`)[i].innerHTML="Rs. "+price;
-      document.getElementsByTagName(`h4`)[i].innerHTML=category;
-
-      }
-      if(document.getElementsByTagName(`h3`)[i].innerHTML=== ""){
-        document.getElementsByTagName(`small`)[i].parentElement.parentElement.style.display=`none`;
-      }
-                                                }
-    }
+  function deleteAd(key, button) {
     
-  
-  function errData(err){
-    console.log(`Errorrr!!!`);
-    console.log(err);
-  }
-  
+    document.getElementById('row').removeChild(button.parentElement.parentElement.parentElement);
+    database.ref('ads/' +  `/` + key).set({});
+    
+  }  
+
   //search function
   function searchFunction() {
     var search = document.getElementById('search');

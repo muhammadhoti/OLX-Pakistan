@@ -45,8 +45,7 @@ function signOut(){
       // console.log(data.val());
       adCard(data.val(), data.key);
       document.getElementById("row").innerHTML += adCard(data.val(), data.key);
-      // table.innerHTML += row;
-      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
+      
     });
   }
 
@@ -61,8 +60,8 @@ function signOut(){
            <h3 class="card-title">${data.title}</h3>
            <h4 class="category">${data.category}</h4>
            <p class="validate card-text">${data.description}</p>
-           <h5>${data.price}</h5>
-           <button type="button" class="btn btn-danger" onclick="deleteFavourite('${key}',this)">Delete Favourite</button>
+           <h5>Rs. ${data.price}</h5>
+           <button type="button" class="btn btn-danger" onclick="deleteFavourite('${key}',this)">Remove From Favourite</button>
          </div>
        </div>
      </div>
@@ -75,8 +74,6 @@ function signOut(){
     
     // console.log(button.parentElement)
     document.getElementById('row').removeChild(button.parentElement.parentElement.parentElement);
-    // var remove = button.parentElement.parentElement;
-    // document.getElementById(`row`).removeChild(remove);
     var favouritesRef = database.ref('favourites/' + firebase.auth().currentUser.uid + `/` + key).set({});
     
   }  
