@@ -200,7 +200,7 @@ function sendMessage(){
 
 function chatMessages(data, key){
   return`
-  <li><b>${data.senderName} :</b>${data.message} <small>${data.timeStamp}</small></li>
+  <li><b>${data.senderName} :</b> ${data.message} <small>${data.timeStamp}</small></li>
   `
 }
 
