@@ -42,7 +42,7 @@ function adCard(data, key){
     return`
     <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-      <small>${data.displayName}</small>
+      <small>By ${data.displayName}</small>
       <img class="validate card-img-top" src=${data.url} />
       <div class="card-body">
       <h3 class="card-title">${data.title}</h3>
@@ -59,14 +59,14 @@ function adCard(data, key){
  return`
   <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
     <div class="card h-100">
-      <small>${data.displayName}</small>
+      <small>By ${data.displayName}</small>
       <img class="validate card-img-top" src=${data.url} />
       <div class="card-body">
       <h3 class="card-title">${data.title}</h3>
       <h4 class="category">${data.category}</h4>
       <p class="validate card-text">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
-      <button type="button" class="btn btn-primary" onclick="sendMessage()">Chat</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Chat</button>
       <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
     </div>
     </div>
@@ -160,4 +160,55 @@ function addToFavourites(button){
 
 function signInFirst(){
   window.location.href = "signin.html";
+}
+
+//Chat For Ads 
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})
+
+var adKey ;
+
+function adChat(key, button){
+  document.getElementById(`modal-list`).innerHTML = "";
+  // console.log(button);
+  // console.log(key);
+  adKey = key;
+  var title = button.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+  document.getElementById(`exampleModalLabel`).innerHTML = title ;
+  fetchMessages();
+}
+
+function sendMessage(){
+  // console.log(document.getElementById(`recipient-messege`).value)
+  newMessage = document.getElementById(`recipient-messege`).value;
+  database.ref('ads/' + adKey +`/messages`).push().set({
+    senderName : firebase.auth().currentUser.displayName,
+    message : newMessage,
+    timeStamp : new Date().toDateString()
+  });
+  document.getElementById(`recipient-messege`).value="";
+}
+
+function chatMessages(data, key){
+  return`
+  <li><b>${data.senderName} :</b>${data.message} <small>${data.timeStamp}</small></li>
+  `
+}
+
+function fetchMessages(){
+    
+  var messagesRef = database.ref('ads/' + adKey +`/messages`);
+  messagesRef.on('child_added', function (data) {
+    // console.log(data.val());
+    chatMessages(data.val(), data.key);
+    document.getElementById("modal-list").innerHTML += chatMessages(data.val(), data.key);
+    
+  });
 }
