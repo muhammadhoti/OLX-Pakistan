@@ -192,7 +192,7 @@ function sendMessage(){
   database.ref('ads/' + adKey +`/messages`).push().set({
     senderName : firebase.auth().currentUser.displayName,
     message : newMessage,
-    timeStamp : new Date().toDateString()
+    timeStamp : formatAMPM(time)
   });
   document.getElementById(`recipient-messege`).value="";
   return false;
@@ -214,3 +214,18 @@ function fetchMessages(key){
     
   });
 }
+
+//Time Stamp Function
+function formatAMPM(date) {
+  var stringDate = date.toDateString()
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = stringDate + " " + hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
+var time = new Date();
