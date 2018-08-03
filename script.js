@@ -182,8 +182,9 @@ function adChat(key, button){
   adKey = key;
   var title = button.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
   document.getElementById(`exampleModalLabel`).innerHTML = title ;
-  fetchMessages();
+  fetchMessages(key);
 }
+
 
 function sendMessage(){
   // console.log(document.getElementById(`recipient-messege`).value)
@@ -194,6 +195,7 @@ function sendMessage(){
     timeStamp : new Date().toDateString()
   });
   document.getElementById(`recipient-messege`).value="";
+  return false;
 }
 
 function chatMessages(data, key){
@@ -202,9 +204,9 @@ function chatMessages(data, key){
   `
 }
 
-function fetchMessages(){
+function fetchMessages(key){
     
-  var messagesRef = database.ref('ads/' + adKey +`/messages`);
+  var messagesRef = database.ref('ads/' + key +`/messages`);
   messagesRef.on('child_added', function (data) {
     // console.log(data.val());
     chatMessages(data.val(), data.key);
