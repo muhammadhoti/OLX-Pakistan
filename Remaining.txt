@@ -1,4 +1,2 @@
-1_menifest
-2_PWA
-3_chat
-4_push Notification
+1_PWA
+2_push Notification
