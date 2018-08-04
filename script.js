@@ -1,9 +1,7 @@
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', ev => {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(res => console.log('registered!!!'))
-      .catch(err => console.log(err));
-  })
+  navigator.serviceWorker
+           .register('./service-worker.js')
+           .then(function() { console.log('Service Worker Registered'); });
 }
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -43,7 +41,7 @@ function adCard(data, key){
     <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
       <div class="card h-100">
       <small>By ${data.displayName}</small>
-      <img class="validate card-img-top" src=${data.url} />
+      <img class="validate card-img-top" src=${data.url} /> 
       <div class="card-body">
       <h3 class="card-title">${data.title}</h3>
       <h4 class="category">${data.category}</h4>
@@ -200,7 +198,7 @@ function sendMessage(){
 
 function chatMessages(data, key){
   return`
-  <li><b>${data.senderName} :</b> ${data.message} <small>${data.timeStamp}</small></li>
+  <li><b>${data.senderName} :</b> ${data.message} <small class="text-messages">${data.timeStamp}</small></li>
   `
 }
 
@@ -229,3 +227,5 @@ function formatAMPM(date) {
 }
 
 var time = new Date();
+
+

@@ -1,3 +1,9 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+           .register('./service-worker.js')
+           .then(function() { console.log('Service Worker Registered'); });
+}
+
 function signOut(){
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
@@ -21,7 +27,7 @@ function signOut(){
         document.getElementById("userProfile").style.display="block";
         //Calling Function Of Fetching 
         fetchFavourites();
-        
+
       } else {
         // No user is signed in.
       } 
@@ -38,19 +44,10 @@ function signOut(){
     
     //fetching favourites 
     var database = firebase.database();
-    function fetchFavourites(){
-    
-    var favouritesRef = database.ref('favourites/' + firebase.auth().currentUser.uid);
-    favouritesRef.on('child_added', function (data) {
-      // console.log(data.val());
-      adCard(data.val(), data.key);
-      document.getElementById("row").innerHTML += adCard(data.val(), data.key);
-      
-    });
-  }
+
 
   //generateAdCard
-  function adCard(data, key){
+  function adCard(data,key){
     return`
      <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
        <div class="card h-100">
@@ -60,7 +57,7 @@ function signOut(){
            <h3 class="card-title">${data.title}</h3>
            <h4 class="category">${data.category}</h4>
            <p class="validate card-text">${data.description}</p>
-           <h5>Rs. ${data.price}</h5>
+           <h5>${data.price}</h5>
            <button type="button" class="btn btn-danger" onclick="deleteFavourite('${key}',this)">Remove From Favourite</button>
          </div>
        </div>
@@ -124,4 +121,27 @@ function signOut(){
     }
   }
     
-    
+//fetching code
+
+function fetchFavourites(){
+
+userId = firebase.auth().currentUser.uid;
+fetch(`https://olx-pakistan-8800e.firebaseio.com/favourites/${userId}.json`)
+    .then(data => {
+        // console.log(data.json())
+        // console.log(data.json())
+        return data.json();
+    })
+    .then(data2 => {
+        // console.log(data2);
+        document.getElementById(`row`).innerHTML = "";
+        for(let i in data2){
+          
+        // console.log(data2[i]);
+        document.getElementById(`row`).innerHTML += adCard(data2[i],i);
+    }
+    })
+  }
+
+  
+  

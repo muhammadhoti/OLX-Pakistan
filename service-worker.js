@@ -1,49 +1,53 @@
-var cacheName = 'OLX-Pakistan';
-var filesToCache = [
-    '/',
-    '/index.html',
-    '/script.js',
-    '/style.css',
-    '/images/OLX-Logo.png',
-    
+const staticAssets = [
+  './',
+  './script.js',
+  './style.css',
+  './index.html',
+  './favourite.html',
+  './favourite.js'
 ];
 
-self.addEventListener('install', function(e) {
-  console.log('[ServiceWorker] Install');
-  e.waitUntil(
-    caches.open(cacheName).then(function(cache) {
-      console.log('[ServiceWorker] Caching app shell');
-      return cache.addAll(filesToCache);
-    })
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('v1')
+      .then(res => {
+        console.log('wait.........!')
+        return res.addAll(staticAssets);
+      })
   );
+  console.log('installed');
+  // var cache = caches.open('v1');
+  // cache.addAll(staticAssets);
 });
 
-// 
-self.addEventListener('activate', function(e) {
-    console.log('[ServiceWorker] Activate');
-  });
-// 
+self.addEventListener('activate', (event) => {
+  console.log('activated');
+});
 
-  self.addEventListener('activate', function(e) {
-    console.log('[ServiceWorker] Activate');
-    e.waitUntil(
-      caches.keys().then(function(keyList) {
-        return Promise.all(keyList.map(function(key) {
-          if (key !== cacheName) {
-            console.log('[ServiceWorker] Removing old cache', key);
-            return caches.delete(key);
-          }
-        }));
-      })
-    );
-    return self.clients.claim();
-  });
+self.addEventListener('fetch', (ev) => {
+  console.log('Fetch from Service Worker ', ev);
+  const req = ev.request;
+  const url = new URL(req.url);
+  if (url.origin === location.origin) {
+    ev.respondWith(cacheFirst(req));
+  }
+  return ev.respondWith(networkFirst(req));
+});
 
-  self.addEventListener('fetch', function(e) {
-    console.log('[ServiceWorker] Fetch', e.request.url);
-    e.respondWith(
-      caches.match(e.request).then(function(response) {
-        return response || fetch(e.request);
-      })
-    );
-  });
+async function cacheFirst(req) {
+  let cacheRes = await caches.match(req);
+  return cacheRes || fetch(req);
+}
+
+async function networkFirst(req) {
+  const dynamicCache = await caches.open('v1-dynamic');
+  try {
+    const networkResponse = await fetch(req);
+    dynamicCache.put(req, networkResponse.clone());
+    return networkResponse;
+  } catch (err) {
+    const cacheResponse = await caches.match(req);
+    return cacheResponse;
+  }
+}

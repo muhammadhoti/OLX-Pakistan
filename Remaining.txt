@@ -1,2 +1,0 @@
-1_PWA
-2_push Notification
