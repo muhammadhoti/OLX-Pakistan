@@ -126,7 +126,7 @@ function signOut(){
 function fetchFavourites(){
 
 userId = firebase.auth().currentUser.uid;
-fetch(`https://iad-98366.firebaseio.com/favourites/${userId}.json`)
+fetch(`https://iad-98366-default-rtdb.firebaseio.com/favourites/${userId}.json`)
     .then(data => {
         // console.log(data.json())
         // console.log(data.json())
