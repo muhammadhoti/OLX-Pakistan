@@ -71,3 +71,12 @@
 .text-messages{
     color: gray;
 }
+.scrollRm{
+    overflow-y: hidden;
+    overflow-x: hidden; 
+}
+.chat{
+    height: 300px;
+    overflow: scroll;
+    overflow-x: hidden; 
+}

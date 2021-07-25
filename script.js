@@ -1,3 +1,5 @@
+var fetchInit = false;
+var prevSession = "";
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('./service-worker.js')
@@ -45,9 +47,9 @@ function adCard(data, key){
       <div class="card-body">
       <h3 class="card-title">${data.title}</h3>
       <h4 class="category">${data.category}</h4>
-      <p class="validate card-text">${data.description}</p>
+      <p class="validate card-text scrollRm">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
-      <button type="button" class="btn btn-primary" onclick="signInFirst()">Chat</button>
+      <button type="button" class="btn btn-primary" onclick="signInFirst()">Comments</button>
       <button type="button" class="btn btn-warning" onclick="signInFirst()">Add To Favourites</button>
         </div>
       </div>
@@ -62,9 +64,9 @@ function adCard(data, key){
       <div class="card-body">
       <h3 class="card-title">${data.title}</h3>
       <h4 class="category">${data.category}</h4>
-      <p class="validate card-text">${data.description}</p>
+      <p class="validate card-text scrollRm">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Chat</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Comments</button>
       <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
     </div>
     </div>
@@ -203,14 +205,20 @@ function chatMessages(data, key){
 }
 
 function fetchMessages(key){
-    
-  var messagesRef = database.ref('ads/' + key +`/messages`);
-  messagesRef.on('child_added', function (data) {
-    // console.log(data.val());
-    chatMessages(data.val(), data.key);
-    document.getElementById("modal-list").innerHTML += chatMessages(data.val(), data.key);
-    
-  });
+    if(!fetchInit){
+      var messagesRef = database.ref('ads/' + key +`/messages`);
+      messagesRef.on('child_added', function (data) {
+        document.getElementById("modal-list").innerHTML += chatMessages(data.val(), data.key);
+        saveSession();
+      });
+      fetchInit = true;
+    }else{
+      document.getElementById("modal-list").innerHTML = prevSession;
+    }
+}
+
+function saveSession(){
+  prevSession = document.getElementById("modal-list").innerHTML;
 }
 
 //Time Stamp Function

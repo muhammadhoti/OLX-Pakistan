@@ -67,7 +67,7 @@ function signOut(){
         <div class="card-body">
         <h3 class="card-title">${data.title}</h3>
         <h4 class="category">${data.category}</h4>
-        <p class="validate card-text">${data.description}</p>
+        <p class="validate card-text scrollRm">${data.description}</p>
         <h5>Rs. ${data.price}</h5>
         <button type="button" class="btn btn-danger" onclick="deleteAd('${key}',this)">Delete</button>
         </div>
