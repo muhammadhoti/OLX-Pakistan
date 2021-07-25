@@ -54,23 +54,7 @@ function adCard(data, key){
     </div>
   `
   }else{
-//  return`
-//   <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
-//     <div class="card h-100">
-//       <small>By ${data.displayName}</small>
-//       <img class="validate card-img-top" src=${data.url} />
-//       <div class="card-body">
-//       <h3 class="card-title">${data.title}</h3>
-//       <h4 class="category">${data.category}</h4>
-//       <p class="validate card-text">${data.description}</p>
-//       <h5>Rs. ${data.price}</h5>
-//       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Chat</button>
-//       <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
-//     </div>
-//     </div>
-//   </div>
-// `
-return`
+ return`
   <div class="cardstyling col-lg-4 col-sm-6 portfolio-item">
     <div class="card h-100">
       <small>By ${data.displayName}</small>
@@ -80,11 +64,12 @@ return`
       <h4 class="category">${data.category}</h4>
       <p class="validate card-text">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Chat</button>
+      <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
     </div>
     </div>
   </div>
-`
-}
+`}
   }
 
   var database = firebase.database();
