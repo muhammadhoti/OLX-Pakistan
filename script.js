@@ -49,7 +49,7 @@ function adCard(data, key){
       <h4 class="category">${data.category}</h4>
       <p class="validate card-text scrollRm">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
-      <button type="button" class="btn btn-primary" onclick="signInFirst()">Comments</button>
+      <button type="button" class="btn btn-primary" onclick="signInFirst()">Chat</button>
       <button type="button" class="btn btn-warning" onclick="signInFirst()">Add To Favourites</button>
         </div>
       </div>
@@ -66,7 +66,7 @@ function adCard(data, key){
       <h4 class="category">${data.category}</h4>
       <p class="validate card-text scrollRm">${data.description}</p>
       <h5>Rs. ${data.price}</h5>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Comments</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" onclick="adChat('${key}',this)">Chat</button>
       <button type="button" class="btn btn-warning" onclick="addToFavourites(this)">Add To Favourites</button>
     </div>
     </div>
